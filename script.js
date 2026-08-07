@@ -12,6 +12,16 @@
   var revealOverlay = document.getElementById("revealOverlay");
   var confettiLayer = document.getElementById("confettiLayer");
   var nextScreen = document.getElementById("nextScreen");
+  var wrongPopup = document.getElementById("wrongPopup");
+  var wrongPopupImage = document.getElementById("wrongPopupImage");
+  var wrongImages = [
+    'wrong/alae0_Shop___Redbubble-removebg-preview.png',
+    'wrong/Cat_sticker-removebg-preview.png',
+    'wrong/Millions_of_unique_designs_by_independent_artists_-removebg-preview.png',
+    'wrong/Orange_cat_crying-removebg-preview.png'
+  ];
+  var wrongImageIndex = 0;
+  var wrongPopupTimer = null;
 
   /* ---------- hint bubble toggle ---------- */
   thoughtBubble.addEventListener("click", function(){
@@ -35,6 +45,20 @@
   function showError(){
     errorMsg.classList.add("show");
     slots.forEach(function(slot){ slot.classList.add("shake"); });
+    if (wrongPopup && wrongPopupImage && wrongImages.length){
+      if (wrongPopupTimer){
+        clearTimeout(wrongPopupTimer);
+        wrongPopupTimer = null;
+      }
+      wrongPopupImage.src = wrongImages[wrongImageIndex % wrongImages.length];
+      wrongImageIndex += 1;
+      wrongPopup.classList.add('show');
+      wrongPopup.setAttribute('aria-hidden', 'false');
+      wrongPopupTimer = setTimeout(function(){
+        wrongPopup.classList.remove('show');
+        wrongPopup.setAttribute('aria-hidden', 'true');
+      }, 2200);
+    }
     setTimeout(function(){
       slots.forEach(function(slot){ slot.classList.remove("shake"); });
     }, 450);

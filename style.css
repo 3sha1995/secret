@@ -241,6 +241,40 @@ button:focus-visible, .thought-bubble:focus-visible{
 }
 .error-msg.show{ opacity: 1; }
 
+.wrong-popup{
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 244, 249, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.wrong-popup.show{
+  opacity: 1;
+}
+.wrong-popup-card{
+  width: min(320px, 76vw);
+  padding: 14px;
+  border-radius: 26px;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 22px 50px rgba(106,62,82,0.2);
+  border: 1px solid rgba(242,142,186,0.18);
+  transform: scale(0.92) translateY(8px);
+  animation: wrongPop 0.28s ease forwards;
+}
+.wrong-popup-image{
+  width: 100%;
+  display: block;
+  object-fit: contain;
+  border-radius: 18px;
+}
+@keyframes wrongPop{
+  to{ transform: scale(1) translateY(0); }
+}
+
 .keypad{
   display: grid;
   grid-template-columns: repeat(3, 58px);
@@ -1036,12 +1070,18 @@ button:focus-visible, .thought-bubble:focus-visible{
    RESPONSIVE
 =========================================================== */
 @media (max-width: 820px){
+  .lock-screen{
+    align-items: flex-start;
+    padding-top: 18px;
+    padding-bottom: 24px;
+  }
   .lock-card{
     grid-template-columns: 1fr;
-    padding: 30px 22px;
+    width: min(100%, 920px);
+    padding: 26px 18px;
     gap: 8px;
   }
-  .lock-right{ order: -1; min-height: 200px; }
+  .lock-right{ order: -1; min-height: 170px; }
   .bear{ width: 150px; height: 168px; transform-origin: center; }
   .keypad{ grid-template-columns: repeat(3, 56px); }
 }
@@ -1083,14 +1123,17 @@ button:focus-visible, .thought-bubble:focus-visible{
 }
 
 @media (max-width: 760px){
+  .next-screen{ padding: 12px 0 18px; }
   .emoji-showcase{ grid-template-columns: 1fr; }
-  .next-card{ width: min(98vw, 98vw); padding: 20px 16px 24px; }
+  .next-card{ width: min(98vw, 98vw); padding: 20px 16px 24px; margin-top: 6px; }
   .message-box{ margin: 10px 0 12px; }
   .emoji-card{ max-width: 100%; }
-  .gallery-inner{ padding-top: 26px; min-height: 140vh; }
+  .gallery-inner{ width: min(100vw, 98vw); padding-top: 18px; padding-bottom: 120px; min-height: 100vh; }
+  .gallery-board{ min-height: 100vh; }
   .gallery-return{ position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 72px; height: 72px; }
   .gallery-return img{ width: 38px; height: 38px; }
-  .cake-panel{ padding: 20px 16px 24px; }
+  .cake-screen{ padding: 14px; }
+  .cake-panel{ width: min(100%, 98vw); padding: 20px 16px 24px; }
   .cake-header{ min-height: 110px; }
   .cake-video-wrap{ width: min(100vw, 100%); }
   .cake-quote-card{ padding: 20px 20px; }
