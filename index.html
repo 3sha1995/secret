@@ -82,13 +82,16 @@
 <!-- ============ PAGE 2: BIRTHDAY LETTER ============ -->
 <main id="nextScreen" class="screen next-screen" aria-hidden="true">
   <div class="next-card">
-    <img src="heart.png" alt="heart sticker" class="sticker sticker-one sticker-img">
-    <div class="sticker sticker-two">✨</div>
+    <span class="sparkle sparkle-one" aria-hidden="true">✨</span>
+    <span class="sparkle sparkle-two" aria-hidden="true">✨</span>
+    <span class="sparkle sparkle-three" aria-hidden="true">✨</span>
+    <span class="sparkle sparkle-four" aria-hidden="true">✨</span>
+    <span class="sticker sticker-one" aria-hidden="true">✨</span>
+    <span class="sticker sticker-two" aria-hidden="true">✨</span>
     <div class="letter-badge">💌</div>
     <p class="eyebrow">for you</p>
     <h2 class="title">Happy 18th Birthday KITKIT 💖</h2>
     <div class="message-box">
-      
       <p class="message-text">I wish you all the best in life. May all your dreams come true, and may your life always be filled with laughter, happiness, and beautiful memories.
 
 You're officially an adult now. Life won't always be easy, and there will be difficult times, but always remember that you're never alone. We'll always be here to support you no matter what.
@@ -121,9 +124,11 @@ Happy 18th once again! Wishing you good health, endless happiness, success, and 
 <!-- ============ CAKE PAGE ============ -->
 <main id="cakeScreen" class="screen cake-screen" aria-hidden="true">
   <div class="cake-panel">
-    <button id="cakeReturnButton" class="cake-return" aria-label="Return to letter page">
-      <img src="return.jpg" alt="Return" />
-    </button>
+    <div class="cake-header">
+      <button id="cakeReturnButton" class="cake-return" aria-label="Return to letter page">
+        <img src="return.jpg" alt="Return" />
+      </button>
+    </div>
     <div class="cake-media">
       <div class="cake-video-wrap">
         <video id="cakeVideo" class="cake-video" autoplay muted loop playsinline></video>
@@ -135,12 +140,16 @@ Happy 18th once again! Wishing you good health, endless happiness, success, and 
   </div>
 </main>
 
+<audio id="backgroundMusic" loop preload="auto">
+  <source src="musics/cake.mp3" type="audio/mpeg">
+  Your browser does not support background audio.
+</audio>
+
 <!-- ============ FLOWER NOTE MODAL ============ -->
 <div id="flowerModal" class="flower-modal" aria-hidden="true">
   <div class="flower-content" role="dialog" aria-modal="true" aria-labelledby="flowerTitle">
     <button class="flower-close" id="flowerClose" aria-label="Close">✕</button>
     <div class="flower-grid">
-      <aside 
       <div class="bouquet">
         <img src="gifts.jpg" alt="gifts" class="bouquet-image" />
         <div class="bouquet-label">Gifts for you</div>

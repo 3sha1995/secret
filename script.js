@@ -138,6 +138,7 @@
   var noteTrigger = document.getElementById('noteTrigger');
   var flowerModal = document.getElementById('flowerModal');
   var flowerClose = document.getElementById('flowerClose');
+  var happyBirthdayCtx = null;
 
   function openFlowerModal(){
     if (!flowerModal) return;
@@ -146,16 +147,22 @@
   function closeFlowerModal(){
     if (!flowerModal) return;
     flowerModal.setAttribute('aria-hidden','true');
+    if (happyBirthdayCtx && happyBirthdayCtx.state !== 'closed'){
+      happyBirthdayCtx.close();
+      happyBirthdayCtx = null;
+    }
   }
 
   if (noteTrigger){
     noteTrigger.addEventListener('click', function(){
       openFlowerModal();
+      playHappyBirthdaySong();
     });
     noteTrigger.addEventListener('keydown', function(e){
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         openFlowerModal();
+        playHappyBirthdaySong();
       }
     });
   }
@@ -168,7 +175,11 @@
   var cakeReturnButton = document.getElementById('cakeReturnButton');
   var cakeVideo = document.getElementById('cakeVideo');
   var cakeMessage = document.getElementById('cakeMessage');
+  var backgroundMusic = document.getElementById('backgroundMusic');
   var galleryBoard = document.getElementById('galleryBoard');
+  var cakeMusic = 'musics/cake.mp3';
+  var frameMusic = 'musics/katseye.mp3';
+  var galleryMusic = frameMusic;
   var galleryImages = [
     'images/152505dc-450c-4c1c-998c-f616b7c3de90.jpg',
     'images/18be345b-b5cd-40d3-8f70-920111a06dcb.jpg',
@@ -224,6 +235,45 @@
     return items[Math.floor(Math.random() * items.length)];
   }
 
+  function playHappyBirthdaySong(){
+    var AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    if (happyBirthdayCtx && happyBirthdayCtx.state !== 'closed'){
+      happyBirthdayCtx.close();
+    }
+    happyBirthdayCtx = new AudioCtx();
+    var ctx = happyBirthdayCtx;
+    var now = ctx.currentTime;
+    var gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.exponentialRampToValueAtTime(0.5, now + 0.05);
+    gain.connect(ctx.destination);
+    var osc = ctx.createOscillator();
+    osc.type = 'triangle';
+    osc.connect(gain);
+
+    var notes = [
+      392, 440, 392, 523, 494,
+      392, 440, 392, 587, 523,
+      392, 784, 659, 523, 494, 440,
+      698, 698, 659, 523, 587, 523
+    ];
+    var durations = [0.35, 0.35, 0.7, 0.35, 0.75,
+                     0.35, 0.35, 0.7, 0.35, 0.85,
+                     0.35, 0.35, 0.35, 0.35, 0.75, 0.9,
+                     0.35, 0.35, 0.35, 0.35, 0.75, 1.2];
+    var time = now;
+    osc.start(time);
+    for (var i = 0; i < notes.length; i++){
+      osc.frequency.setValueAtTime(notes[i], time);
+      time += durations[i];
+    }
+    gain.gain.setValueAtTime(0.5, time);
+    gain.gain.exponentialRampToValueAtTime(0.001, time + 0.2);
+    osc.stop(time + 0.25);
+    setTimeout(function(){ if (ctx.state !== 'closed') ctx.close(); happyBirthdayCtx = null; }, (time - now + 0.4) * 1000);
+  }
+
   function renderGalleryCards(){
     if (!galleryBoard) return;
     galleryBoard.innerHTML = '';
@@ -256,6 +306,18 @@
     });
   }
 
+  function playBackgroundMusic(src){
+    if (!backgroundMusic) return;
+    if (!backgroundMusic.src || backgroundMusic.src.indexOf(src) === -1){
+      backgroundMusic.src = src;
+      backgroundMusic.load();
+    }
+    backgroundMusic.volume = 0.8;
+    backgroundMusic.play().catch(function(error){
+      console.warn('Background music play prevented:', error);
+    });
+  }
+
   function openGalleryScreen(){
     if (!galleryScreen) return;
     nextScreen.classList.remove('is-active');
@@ -263,11 +325,18 @@
     galleryScreen.classList.add('is-active');
     galleryScreen.setAttribute('aria-hidden', 'false');
     renderGalleryCards();
+    playBackgroundMusic(galleryMusic);
   }
   function closeGalleryScreen(){
     if (!galleryScreen) return;
     galleryScreen.classList.remove('is-active');
     galleryScreen.setAttribute('aria-hidden', 'true');
+    if (backgroundMusic){
+      backgroundMusic.pause();
+      backgroundMusic.currentTime = 0;
+      backgroundMusic.src = '';
+      backgroundMusic.load();
+    }
     nextScreen.classList.add('is-active');
     nextScreen.setAttribute('aria-hidden', 'false');
   }
@@ -284,6 +353,9 @@
       cakeVideo.load();
       cakeVideo.play().catch(function(){});
     }
+    if (backgroundMusic){
+      playBackgroundMusic(cakeMusic);
+    }
     if (cakeMessage){
       cakeMessage.textContent = pickRandomItem(cakeQuotes);
     }
@@ -293,6 +365,12 @@
     if (!cakeScreen) return;
     cakeScreen.classList.remove('is-active');
     cakeScreen.setAttribute('aria-hidden', 'true');
+    if (backgroundMusic){
+      backgroundMusic.pause();
+      backgroundMusic.currentTime = 0;
+      backgroundMusic.src = '';
+      backgroundMusic.load();
+    }
     nextScreen.classList.add('is-active');
     nextScreen.setAttribute('aria-hidden', 'false');
   }
