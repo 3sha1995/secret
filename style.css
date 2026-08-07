@@ -271,6 +271,14 @@ button:focus-visible, .thought-bubble:focus-visible{
   object-fit: contain;
   border-radius: 18px;
 }
+.wrong-popup-text{
+  margin: 12px 0 0;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: #c94f7d;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+}
 @keyframes wrongPop{
   to{ transform: scale(1) translateY(0); }
 }
