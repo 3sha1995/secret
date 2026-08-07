@@ -1,0 +1,29 @@
+<svg viewBox="0 0 320 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cute bear">
+  <defs>
+    <linearGradient id="bear-fur" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#F8D4C8" />
+      <stop offset="100%" stop-color="#F2B8A7" />
+    </linearGradient>
+    <linearGradient id="ear-shadow" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#F8D4C8" />
+      <stop offset="100%" stop-color="#E0A98F" />
+    </linearGradient>
+  </defs>
+
+  <rect width="320" height="340" rx="32" fill="transparent" />
+  <path d="M160 280c-64 0-110-52-110-116 0-42 21-84 62-106 10-5 22-8 34-8h28c12 0 24 3 34 8 41 22 62 64 62 106 0 64-46 116-110 116z" fill="url(#bear-fur)" />
+  <ellipse cx="106" cy="82" rx="44" ry="44" fill="url(#ear-shadow)" />
+  <ellipse cx="214" cy="82" rx="44" ry="44" fill="url(#ear-shadow)" />
+  <ellipse cx="160" cy="210" rx="90" ry="72" fill="#FFDDD1" />
+  <circle cx="130" cy="160" r="18" fill="#4E3024" opacity="0.9" />
+  <circle cx="190" cy="160" r="18" fill="#4E3024" opacity="0.9" />
+  <circle cx="130" cy="158" r="8" fill="#582F20" />
+  <circle cx="190" cy="158" r="8" fill="#582F20" />
+  <path d="M140 190c10 14 20 14 30 0" stroke="#4E3024" stroke-width="8" stroke-linecap="round" fill="none" />
+  <path d="M150 210c-28 16-42 52-42 76 0 12 10 22 22 22h80c12 0 22-10 22-22 0-24-14-60-42-76" fill="#F6D2C1" />
+  <path d="M118 250c8 14 32 20 42 20s34-6 42-20" stroke="#AC7A69" stroke-width="10" stroke-linecap="round" fill="none" />
+  <ellipse cx="100" cy="160" rx="14" ry="10" fill="#F5B8A5" opacity="0.9" />
+  <ellipse cx="220" cy="160" rx="14" ry="10" fill="#F5B8A5" opacity="0.9" />
+  <path d="M94 226c-8 5-14 14-14 22 0 14 12 26 26 26 14 0 20-8 28-20" stroke="#C0816C" stroke-width="10" fill="none" stroke-linecap="round" />
+  <path d="M226 226c8 5 14 14 14 22 0 14-12 26-26 26-14 0-20-8-28-20" stroke="#C0816C" stroke-width="10" fill="none" stroke-linecap="round" />
+</svg>

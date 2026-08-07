@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Surprise For You 🎂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ PAGE 1: PASSCODE ============ -->
+<main id="lockScreen" class="screen lock-screen">
+  <div class="lock-card">
+
+    <div class="lock-left">
+      <p class="eyebrow">a little something for</p>
+      <h1 class="title">Enter Code</h1>
+      <div class="hearts" aria-hidden="true">
+        <img src="heart.png" alt="heart" class="heart-icon">
+        <img src="heart.png" alt="heart" class="heart-icon">
+        <img src="heart.png" alt="heart" class="heart-icon">
+        <img src="heart.png" alt="heart" class="heart-icon">
+      </div>
+
+      <div class="passcode-display" id="passcodeDisplay">
+        <span class="digit-slot" data-slot="0"></span>
+        <span class="digit-slot" data-slot="1"></span>
+        <span class="digit-slot" data-slot="2"></span>
+        <span class="digit-slot" data-slot="3"></span>
+      </div>
+      <p class="error-msg" id="errorMsg">not quite — try again 🩵</p>
+
+      <div class="keypad" id="keypad">
+        <button class="key" data-key="1">1</button>
+        <button class="key" data-key="2">2</button>
+        <button class="key" data-key="3">3</button>
+        <button class="key" data-key="4">4</button>
+        <button class="key" data-key="5">5</button>
+        <button class="key" data-key="6">6</button>
+        <button class="key" data-key="7">7</button>
+        <button class="key" data-key="8">8</button>
+        <button class="key" data-key="9">9</button>
+        <button class="key key-clear" data-key="clear">C</button>
+        <button class="key" data-key="0">0</button>
+        <button class="key key-del" data-key="del">⌫</button>
+      </div>
+    </div>
+
+    <div class="lock-right">
+      <div class="bear-wrap">
+        <button class="thought-bubble" id="thoughtBubble" aria-expanded="false">
+          <span class="thought-default">hint? 💭</span>
+          <span class="thought-reveal">it's your birthday 🎈</span>
+        </button>
+        <img src="bear.png" alt="Birthday bear" class="bear-image" />
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ============ TRANSITION OVERLAY ============ -->
+<div class="reveal-overlay" id="revealOverlay" aria-hidden="true">
+  <div class="cloud-burst" id="cloudBurst">
+    <div class="burst-cloud bc1"></div>
+    <div class="burst-cloud bc2"></div>
+    <div class="burst-cloud bc3"></div>
+    <div class="burst-cloud bc4"></div>
+    <div class="burst-cloud bc5"></div>
+  </div>
+  <div class="confetti-layer" id="confettiLayer"></div>
+  <div class="happy-birthday" id="happyBirthday">
+    <span class="hb-word hb-1">HAPPY</span>
+    <span class="hb-word hb-2">BIRTHDAY</span>
+    <span class="hb-sub">to my favorite person 🩵</span>
+  </div>
+</div>
+
+<!-- ============ PAGE 2: BIRTHDAY LETTER ============ -->
+<main id="nextScreen" class="screen next-screen" aria-hidden="true">
+  <div class="next-card">
+    <img src="heart.png" alt="heart sticker" class="sticker sticker-one sticker-img">
+    <div class="sticker sticker-two">✨</div>
+    <div class="letter-badge">💌</div>
+    <p class="eyebrow">for you</p>
+    <h2 class="title">Happy Birthday, my love 💖</h2>
+    <div class="message-box">
+      <p>Here’s a little note just for you:</p>
+      <p class="message-text">You make every day feel brighter, softer, and sweeter. I hope your birthday is filled with love, laughter, and a thousand tiny happy moments.</p>
+    </div>
+    <div class="emoji-showcase" aria-hidden="true">
+      <div class="emoji-card"><img src="Cutie kitty.png" id="noteTrigger" alt="open little notes" class="emoji-card-img note-trigger" tabindex="0"></div>
+      <div class="emoji-card"><img src="frame.jpg" alt="picture frame" class="emoji-card-img"></div>
+      <div class="emoji-card"><img src="cake.jpg" alt="cake" class="emoji-card-img"></div>
+    </div>
+  </div>
+</main>
+
+<!-- ============ FLOWER NOTE MODAL ============ -->
+<div id="flowerModal" class="flower-modal" aria-hidden="true">
+  <div class="flower-content" role="dialog" aria-modal="true" aria-labelledby="flowerTitle">
+    <button class="flower-close" id="flowerClose" aria-label="Close">✕</button>
+    <div class="flower-grid">
+      <aside class="note-list">
+        <h3 id="flowerTitle">Little notes</h3>
+        <ul>
+          <li><span class="note-icon">🩵</span><span>you mean so much to me</span></li>
+          <li><span class="note-icon">🩵</span><span>life is sweeter with you</span></li>
+          <li><span class="note-icon">🩵</span><span>i appreciate you always</span></li>
+          <li><span class="note-icon">🩵</span><span>forever grateful for you</span></li>
+          <li><span class="note-icon">🩵</span><span>thank you for being you</span></li>
+          <li><span class="note-icon">🩵</span><span>you're a gift to my life</span></li>
+        </ul>
+      </aside>
+      <div class="bouquet">
+        <img src="gifts.jpg" alt="gifts" class="bouquet-image" />
+        <div class="bouquet-label">Gifts for you</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
