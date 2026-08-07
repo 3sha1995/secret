@@ -290,15 +290,23 @@
       var alpha = index / galleryImages.length;
       var left = 4 + Math.random() * (safeLeftMax - 4);
       var top = 4 + Math.random() * (safeTopMax - 4);
+      // clamp positions to stay inside the board
+      left = Math.max(2, Math.min(left, 96));
+      top = Math.max(2, Math.min(top, 96));
       card.style.left = left + '%';
       card.style.top = top + '%';
       var rotate = (Math.random() * 24 - 12) + 'deg';
       card.style.setProperty('--card-rotate', rotate);
-      card.style.zIndex = 10 + (index % 6);
+      // ensure a unique stacking order so cards don't all collapse under one image
+      card.style.zIndex = 1000 + index;
       card.style.animationDelay = (Math.random() * 1.5) + 's';
       card.style.animationDuration = (5 + Math.random() * 3) + 's';
       var image = document.createElement('img');
       image.src = src;
+      image.addEventListener('error', function(){
+        console.warn('Gallery image failed to load, replacing with placeholder:', src);
+        this.src = 'images/family.jpg';
+      });
       image.alt = 'gallery photo ' + (index + 1);
       image.className = 'gallery-photo';
       card.appendChild(image);
