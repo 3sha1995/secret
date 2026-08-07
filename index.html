@@ -93,12 +93,23 @@
     </div>
     <div class="emoji-showcase" aria-hidden="true">
       <div class="emoji-card"><img src="Cutie kitty.png" id="noteTrigger" alt="open little notes" class="emoji-card-img note-trigger" tabindex="0"></div>
-      <div class="emoji-card"><img src="frame.jpg" alt="picture frame" class="emoji-card-img"></div>
+      <div class="emoji-card frame-card" id="frameCard" tabindex="0" role="button" aria-pressed="false">
+        <img src="frame.jpg" alt="picture frame" class="emoji-card-img">
+      </div>
       <div class="emoji-card"><img src="cake.jpg" alt="cake" class="emoji-card-img"></div>
     </div>
   </div>
 </main>
-
+<!-- ============ GALLERY PAGE ============ -->
+<main id="galleryScreen" class="screen gallery-screen" aria-hidden="true">
+  <div class="gallery-background"></div>
+  <div class="gallery-inner">
+    <button id="returnButton" class="gallery-return" aria-label="Return to letter page">
+      <img src="return.jpg" alt="Return" />
+    </button>
+    <div class="gallery-board" id="galleryBoard" aria-live="polite"></div>
+  </div>
+</main>
 <!-- ============ FLOWER NOTE MODAL ============ -->
 <div id="flowerModal" class="flower-modal" aria-hidden="true">
   <div class="flower-content" role="dialog" aria-modal="true" aria-labelledby="flowerTitle">

@@ -159,6 +159,99 @@
       }
     });
   }
+
+  var frameCard = document.getElementById('frameCard');
+  var galleryScreen = document.getElementById('galleryScreen');
+  var returnButton = document.getElementById('returnButton');
+  var galleryBoard = document.getElementById('galleryBoard');
+  var galleryImages = [
+    'images/152505dc-450c-4c1c-998c-f616b7c3de90.jpg',
+    'images/18be345b-b5cd-40d3-8f70-920111a06dcb.jpg',
+    'images/212ae075-37e8-4cc2-b4a5-c2028959b0e6.jpg',
+    'images/530676e9-df9b-4376-8cac-57698c22d9b0.jpg',
+    'images/582e6069-a8af-4100-a651-9d08d1257174.jpg',
+    'images/60c1ca7e-b4ea-42e0-822d-71d018b7e929.jpg',
+    'images/67d2287d-4ebe-48a9-a6df-60462eab02a7.jpg',
+    'images/6f60149b-9e32-40cc-82b6-a21226b82b68.jpg',
+    'images/6ffdb910-528e-4a8a-b735-0b340126c8fd.jpg',
+    'images/723474da-0123-429b-8bb0-b73c614a9389.jpg',
+    'images/74dfff1f-cbfb-4d83-935d-a63ff819df08.jpg',
+    'images/7c2d3e0b-90f7-434f-9d2a-eb5a26928daa.jpg',
+    'images/9a50127a-1d41-4722-8a8d-7175aa5202d2.jpg',
+    'images/ae6f072f-67a7-4cb7-870f-9c8938e7c94f.jpg',
+    'images/ae89b263-32e8-4997-bc9d-a47e800e79f6.jpg',
+    'images/c1513b11-3d6e-4fdd-b1f1-895a17772d54.jpg',
+    'images/e9187d48-ae86-4ed9-b94a-37dad692f2e7.jpg',
+    'images/e9677e60-afa5-4660-a272-ab980ae9c736.jpg',
+    'images/eab8224a-6e22-454a-9448-4e2229d25ee4.jpg',
+    'images/ebc456f0-e03e-45b0-ae88-b5dc610e8bbb.jpg',
+    'images/fdfb942f-702e-45a0-ba9e-87941cf1057d.jpg'
+  ];
+
+  function renderGalleryCards(){
+    if (!galleryBoard) return;
+    galleryBoard.innerHTML = '';
+    galleryImages.forEach(function(src, index){
+      var card = document.createElement('div');
+      card.className = 'gallery-card';
+      var cardsPerRow = 3;
+      var row = Math.floor(index / cardsPerRow);
+      var baseLeft = 8 + (index % cardsPerRow) * 30;
+      var jitterLeft = Math.random() * 20 - 10;
+      var left = Math.max(4, Math.min(80, baseLeft + jitterLeft)) + '%';
+      var baseTop = 8 + row * 28;
+      var jitterTop = Math.random() * 18 - 9;
+      var top = Math.max(4, Math.min(160, baseTop + jitterTop)) + '%';
+      var rotate = (Math.random() * 24 - 12) + 'deg';
+      card.style.left = left;
+      card.style.top = top;
+      card.style.setProperty('--card-rotate', rotate);
+      card.style.zIndex = 10 + (index % 5);
+      card.style.animationDelay = (Math.random() * 1.5) + 's';
+      card.style.animationDuration = (5 + Math.random() * 4) + 's';
+      var image = document.createElement('img');
+      image.src = src;
+      image.alt = 'gallery photo ' + (index + 1);
+      image.className = 'gallery-photo';
+      card.appendChild(image);
+      galleryBoard.appendChild(card);
+    });
+  }
+
+  function openGalleryScreen(){
+    if (!galleryScreen) return;
+    nextScreen.classList.remove('is-active');
+    nextScreen.setAttribute('aria-hidden', 'true');
+    galleryScreen.classList.add('is-active');
+    galleryScreen.setAttribute('aria-hidden', 'false');
+    renderGalleryCards();
+  }
+  function closeGalleryScreen(){
+    if (!galleryScreen) return;
+    galleryScreen.classList.remove('is-active');
+    galleryScreen.setAttribute('aria-hidden', 'true');
+    nextScreen.classList.add('is-active');
+    nextScreen.setAttribute('aria-hidden', 'false');
+  }
+
+  if (frameCard){
+    frameCard.addEventListener('click', function(){
+      openGalleryScreen();
+    });
+    frameCard.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openGalleryScreen();
+      }
+    });
+  }
+
+  if (returnButton){
+    returnButton.addEventListener('click', function(){
+      closeGalleryScreen();
+    });
+  }
+
   if (flowerClose){
     flowerClose.addEventListener('click', function(){ closeFlowerModal(); });
   }
