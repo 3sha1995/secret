@@ -731,16 +731,67 @@ button:focus-visible, .thought-bubble:focus-visible{
   box-shadow: 0 24px 60px rgba(106,62,82,0.16);
   display: grid;
   gap: 20px;
+  z-index: 2;
+}
+.cake-screen{
+  position: relative;
+  overflow: hidden;
+}
+.cake-ribbon{
+  position: absolute;
+  z-index: 3;
+  display: inline-block;
+  font-size: 2rem;
+  line-height: 1;
+  pointer-events: none;
+  opacity: 0.95;
+  animation: ribbonFloat 5.5s ease-in-out infinite;
+  --ribbon-rotate: 0deg;
+}
+.ribbon-left{
+  left: 3%;
+  top: 12%;
+  --ribbon-rotate: -10deg;
+  transform: rotate(-10deg);
+  animation-delay: -1.2s;
+}
+.ribbon-right{
+  right: 3%;
+  top: 12%;
+  --ribbon-rotate: 10deg;
+  transform: rotate(10deg);
+  animation-delay: -2.2s;
+}
+.ribbon-top{
+  left: 50%;
+  top: 4%;
+  --ribbon-rotate: -6deg;
+  transform: translateX(-50%) rotate(-6deg);
+  animation-delay: -0.6s;
+}
+.ribbon-bottom{
+  left: 50%;
+  bottom: 4%;
+  --ribbon-rotate: 5deg;
+  transform: translateX(-50%) rotate(5deg);
+  animation-delay: -1.8s;
+}
+@keyframes ribbonFloat{
+  0%, 100%{ transform: translateY(0) rotate(var(--ribbon-rotate, 0deg)); }
+  50%{ transform: translateY(-12px) rotate(calc(var(--ribbon-rotate, 0deg) + 2deg)); }
 }
 .cake-header{
-  display: grid;
-  place-items: center;
-  min-height: 220px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 180px;
+  padding-top: 20px;
+  padding-bottom: 8px;
 }
 .cake-return{
-  width: 68px;
-  height: 68px;
-  margin-top: 32px;
+  width: 76px;
+  height: 76px;
+  margin-top: 0;
   border: none;
   border-radius: 50%;
   background: rgba(255,255,255,0.95);
@@ -748,6 +799,7 @@ button:focus-visible, .thought-bubble:focus-visible{
   display: grid;
   place-items: center;
   cursor: pointer;
+  flex-shrink: 0;
 }
 .cake-return img{
   width: 34px;
