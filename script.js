@@ -161,8 +161,13 @@
   }
 
   var frameCard = document.getElementById('frameCard');
+  var cakeTrigger = document.getElementById('cakeTrigger');
   var galleryScreen = document.getElementById('galleryScreen');
   var returnButton = document.getElementById('returnButton');
+  var cakeScreen = document.getElementById('cakeScreen');
+  var cakeReturnButton = document.getElementById('cakeReturnButton');
+  var cakeVideo = document.getElementById('cakeVideo');
+  var cakeMessage = document.getElementById('cakeMessage');
   var galleryBoard = document.getElementById('galleryBoard');
   var galleryImages = [
     'images/152505dc-450c-4c1c-998c-f616b7c3de90.jpg',
@@ -188,27 +193,60 @@
     'images/fdfb942f-702e-45a0-ba9e-87941cf1057d.jpg'
   ];
 
+  var cakeVideos = [
+    'videos/4581293f-ef79-40f5-8fb6-bf2939921429.mp4',
+    'videos/ea410663-d453-46f5-b89a-2d4f7a23815c.mp4'
+  ];
+  var cakeQuotes = [
+    'Believe in yourself, even when things don\'t go as planned. Every challenge you overcome will make you stronger and wiser.',
+    'Don\'t be afraid to dream big. Great achievements always begin with the courage to take the first step.',
+    'Life won\'t always be easy, but every obstacle you face is preparing you for something greater. Keep going no matter what.',
+    'Success doesn\'t happen overnight. Stay patient, work hard, and trust that your efforts will pay off in time.',
+    'Never compare your journey to someone else\'s. Everyone has their own path, and your story will unfold at the right time.',
+    'Don\'t let failure define you. Instead, let it teach you, motivate you, and help you become a better version of yourself.',
+    'Always stay true to who you are. The right people will appreciate you for your genuine heart and authentic self.',
+    'Keep learning, keep growing, and never stop improving. The more knowledge and experience you gain, the closer you\'ll get to your goals.',
+    'There will be days when you feel like giving up, but remember why you started. Your future is worth fighting for.',
+    'Choose kindness whenever you can. A simple act of kindness can make a difference in someone\'s life and yours.',
+    'Celebrate every small victory. Even the smallest progress is proof that you\'re moving closer to your dreams.',
+    'Be grateful for every opportunity that comes your way. Each experience, whether good or bad, has something valuable to teach you.',
+    'Don\'t let fear make your decisions. Have the courage to step outside your comfort zone because that\'s where growth begins.',
+    'Stay focused on your goals, but don\'t forget to enjoy the journey. The memories you make along the way are just as important as the destination.',
+    'Believe that you are capable of amazing things. Your potential is greater than you realize, and your future is full of possibilities.',
+    'Surround yourself with people who encourage you to grow, support your dreams, and inspire you to become your best self.',
+    'Keep your faith, stay hopeful, and never lose sight of your dreams. Even the longest journeys begin with one determined step.',
+    'Don\'t be discouraged by setbacks. Sometimes the hardest roads lead to the most beautiful destinations.',
+    'Remember that success isn\'t just about achievements—it\'s also about becoming a kind, humble, and resilient person along the way.',
+    'As you begin this new chapter of adulthood, never stop believing in yourself. Keep chasing your dreams, embrace every opportunity, and trust that your hard work will lead you to the future you\'ve always imagined.'
+  ];
+
+  function pickRandomItem(items){
+    return items[Math.floor(Math.random() * items.length)];
+  }
+
   function renderGalleryCards(){
     if (!galleryBoard) return;
     galleryBoard.innerHTML = '';
+    var boardRect = galleryBoard.getBoundingClientRect();
+    var cardWidth = boardRect.width < 860 ? 160 : 200;
+    var cardHeight = boardRect.width < 860 ? 210 : 260;
+    var cardsPerRow = boardRect.width < 720 ? 2 : boardRect.width < 980 ? 3 : 4;
+    var safeLeftMax = Math.max(0, 100 - (cardWidth / boardRect.width) * 100 - 4);
+    var safeTopMax = Math.max(0, 100 - (cardHeight / boardRect.height) * 100 - 4);
+
     galleryImages.forEach(function(src, index){
       var card = document.createElement('div');
       card.className = 'gallery-card';
-      var cardsPerRow = 3;
-      var row = Math.floor(index / cardsPerRow);
-      var baseLeft = 8 + (index % cardsPerRow) * 30;
-      var jitterLeft = Math.random() * 20 - 10;
-      var left = Math.max(4, Math.min(80, baseLeft + jitterLeft)) + '%';
-      var baseTop = 8 + row * 28;
-      var jitterTop = Math.random() * 18 - 9;
-      var top = Math.max(4, Math.min(160, baseTop + jitterTop)) + '%';
+      var alpha = index / galleryImages.length;
+      var left = 4 + Math.random() * (safeLeftMax - 4);
+      var top = 4 + Math.random() * (safeTopMax - 4);
+      card.style.left = left + '%';
+      card.style.top = top + '%';
       var rotate = (Math.random() * 24 - 12) + 'deg';
-      card.style.left = left;
-      card.style.top = top;
       card.style.setProperty('--card-rotate', rotate);
-      card.style.zIndex = 10 + (index % 5);
+      card.style.zIndex = 10 + (index % 6);
       card.style.animationDelay = (Math.random() * 1.5) + 's';
-      card.style.animationDuration = (5 + Math.random() * 4) + 's';
+      card.style.animationDuration = (5 + Math.random() * 3) + 's';
       var image = document.createElement('img');
       image.src = src;
       image.alt = 'gallery photo ' + (index + 1);
@@ -234,6 +272,31 @@
     nextScreen.setAttribute('aria-hidden', 'false');
   }
 
+  function openCakeScreen(){
+    if (!cakeScreen) return;
+    nextScreen.classList.remove('is-active');
+    nextScreen.setAttribute('aria-hidden', 'true');
+    cakeScreen.classList.add('is-active');
+    cakeScreen.setAttribute('aria-hidden', 'false');
+
+    if (cakeVideo){
+      cakeVideo.src = pickRandomItem(cakeVideos);
+      cakeVideo.load();
+      cakeVideo.play().catch(function(){});
+    }
+    if (cakeMessage){
+      cakeMessage.textContent = pickRandomItem(cakeQuotes);
+    }
+  }
+
+  function closeCakeScreen(){
+    if (!cakeScreen) return;
+    cakeScreen.classList.remove('is-active');
+    cakeScreen.setAttribute('aria-hidden', 'true');
+    nextScreen.classList.add('is-active');
+    nextScreen.setAttribute('aria-hidden', 'false');
+  }
+
   if (frameCard){
     frameCard.addEventListener('click', function(){
       openGalleryScreen();
@@ -249,6 +312,24 @@
   if (returnButton){
     returnButton.addEventListener('click', function(){
       closeGalleryScreen();
+    });
+  }
+
+  if (cakeTrigger){
+    cakeTrigger.addEventListener('click', function(){
+      openCakeScreen();
+    });
+    cakeTrigger.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        openCakeScreen();
+      }
+    });
+  }
+
+  if (cakeReturnButton){
+    cakeReturnButton.addEventListener('click', function(){
+      closeCakeScreen();
     });
   }
 

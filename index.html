@@ -19,7 +19,7 @@
       <p class="eyebrow">a little something for</p>
       <h1 class="title">Enter Code</h1>
       <div class="hearts" aria-hidden="true">
-        <img src="heart.png" alt="heart" class="heart-icon">
+        <img src="bear.png" alt="heart" class="heart-icon">
         <img src="heart.png" alt="heart" class="heart-icon">
         <img src="heart.png" alt="heart" class="heart-icon">
         <img src="heart.png" alt="heart" class="heart-icon">
@@ -86,17 +86,25 @@
     <div class="sticker sticker-two">✨</div>
     <div class="letter-badge">💌</div>
     <p class="eyebrow">for you</p>
-    <h2 class="title">Happy Birthday, my love 💖</h2>
+    <h2 class="title">Happy 18th Birthday KITKIT 💖</h2>
     <div class="message-box">
-      <p>Here’s a little note just for you:</p>
-      <p class="message-text">You make every day feel brighter, softer, and sweeter. I hope your birthday is filled with love, laughter, and a thousand tiny happy moments.</p>
+      
+      <p class="message-text">I wish you all the best in life. May all your dreams come true, and may your life always be filled with laughter, happiness, and beautiful memories.
+
+You're officially an adult now. Life won't always be easy, and there will be difficult times, but always remember that you're never alone. We'll always be here to support you no matter what.
+
+Keep doing the things you love, believe in yourself, and never stop chasing your dreams. We know you'll achieve great things, our future engineer! Stay kind, stay strong, and keep reaching for your goals.
+
+Happy 18th once again! Wishing you good health, endless happiness, success, and all the love you deserve. ❤️</p>
     </div>
     <div class="emoji-showcase" aria-hidden="true">
       <div class="emoji-card"><img src="Cutie kitty.png" id="noteTrigger" alt="open little notes" class="emoji-card-img note-trigger" tabindex="0"></div>
       <div class="emoji-card frame-card" id="frameCard" tabindex="0" role="button" aria-pressed="false">
         <img src="frame.jpg" alt="picture frame" class="emoji-card-img">
       </div>
-      <div class="emoji-card"><img src="cake.jpg" alt="cake" class="emoji-card-img"></div>
+      <div class="emoji-card cake-card" id="cakeTrigger" tabindex="0" role="button" aria-pressed="false">
+        <img src="cake.jpg" alt="cake" class="emoji-card-img">
+      </div>
     </div>
   </div>
 </main>
@@ -110,22 +118,29 @@
     <div class="gallery-board" id="galleryBoard" aria-live="polite"></div>
   </div>
 </main>
+<!-- ============ CAKE PAGE ============ -->
+<main id="cakeScreen" class="screen cake-screen" aria-hidden="true">
+  <div class="cake-panel">
+    <button id="cakeReturnButton" class="cake-return" aria-label="Return to letter page">
+      <img src="return.jpg" alt="Return" />
+    </button>
+    <div class="cake-media">
+      <div class="cake-video-wrap">
+        <video id="cakeVideo" class="cake-video" autoplay muted loop playsinline></video>
+      </div>
+      <div class="cake-quote-card">
+        <p id="cakeMessage" class="cake-message"></p>
+      </div>
+    </div>
+  </div>
+</main>
+
 <!-- ============ FLOWER NOTE MODAL ============ -->
 <div id="flowerModal" class="flower-modal" aria-hidden="true">
   <div class="flower-content" role="dialog" aria-modal="true" aria-labelledby="flowerTitle">
     <button class="flower-close" id="flowerClose" aria-label="Close">✕</button>
     <div class="flower-grid">
-      <aside class="note-list">
-        <h3 id="flowerTitle">Little notes</h3>
-        <ul>
-          <li><span class="note-icon">🩵</span><span>you mean so much to me</span></li>
-          <li><span class="note-icon">🩵</span><span>life is sweeter with you</span></li>
-          <li><span class="note-icon">🩵</span><span>i appreciate you always</span></li>
-          <li><span class="note-icon">🩵</span><span>forever grateful for you</span></li>
-          <li><span class="note-icon">🩵</span><span>thank you for being you</span></li>
-          <li><span class="note-icon">🩵</span><span>you're a gift to my life</span></li>
-        </ul>
-      </aside>
+      <aside 
       <div class="bouquet">
         <img src="gifts.jpg" alt="gifts" class="bouquet-image" />
         <div class="bouquet-label">Gifts for you</div>
